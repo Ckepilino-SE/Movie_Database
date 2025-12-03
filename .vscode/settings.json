@@ -1,0 +1,20 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Local Instance MySQL80",
+            "database": "movie_database",
+            "username": "root",
+            "password": "Ck431078!",
+            "connectionTimeout": 30
+        }
+    ]
+}
