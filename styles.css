@@ -1,0 +1,153 @@
+body {
+  font-family: Helvetica;
+  background-color: #2e222f;
+}
+
+h2 {
+  color: #f9c22b;
+  line-height: 24px;
+}
+
+p {
+  color: #7f708a;
+  line-height: 8px;
+}
+
+main {
+  padding: 16px 8px;
+}
+
+footer {
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: #7f708a80;
+  overflow: hidden;
+  background-color: #3e3546;
+  padding: 0px 8px;
+  border-radius: 14px;
+  font-weight: bold;
+  box-shadow: 4px 4px 12px 0px #221723;
+}
+
+.header {
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: #7f708a80;
+  overflow: hidden;
+  background-color: #3e3546;
+  padding: 0px 0px;
+  border-radius: 14px;
+  font-weight: bold;
+  box-shadow: 4px 4px 12px 0px #221723;
+}
+
+.header a {
+  float: left;
+  color: #f9c22b;
+  text-align: center;
+  padding: 4px 10px;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 32px;
+  border-radius: 0px;
+}
+
+.header a.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  color: #f9c22b;
+  background-color: #2e222f;
+}
+
+.header a.active {
+  background-color: #f9c22b;
+  color: #3e3546;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
+
+form div {
+  color: #f9c22b;
+  padding: 4px;
+}
+
+input {
+  border-style: inset;
+  border-width: 2px;
+  border-radius: 8px;
+  border-color: #3e3546;
+  background-color: #2e222f;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  color: #f9c22b;
+}
+
+tbody {
+  color: #7f708a;
+}
+
+form {
+  color: #f9c22b;
+}
+
+label {
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  border-style: inset;
+  border-width: 2px;
+  border-radius: 14px;
+  border-color: #3e3546;
+  background-color: #2e222f;
+  color: #7f708a;
+  line-height: 8px;
+}
+
+button {
+  width: 100%;
+  box-sizing: border-box;
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: #7f708a80;
+  overflow: hidden;
+  background-color: #3e3546;
+  padding: 8px 0px;
+  border: none;
+  border-radius: 14px;
+  font-weight: bold;
+  box-shadow: 4px 4px 12px 0px #221723;
+  color: #f9c22b;
+}
+
+button:hover {
+  background-color: #2e222f;
+}
+
+button:active {
+  background-color: #f9c22b;
+  color: #3e3546;
+}
