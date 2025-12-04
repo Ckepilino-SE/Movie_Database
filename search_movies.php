@@ -20,33 +20,33 @@
   <main>
     <form action="search_results.php", method="POST">
         <div>
-          <label for="title">Title</label>
-          <input type="text" id="title" name="title">
+          <label for="Title">Title</label>
+          <input type="text" id="Title" name="Title">
         </div>
 
         <div>
-          <label for="director">Director</label>
-          <input type="text" id="director" name="director">
+          <label for="ReleaseDate">Release Date</label>
+          <input type="text" id="ReleaseDate" name="ReleaseDate">
         </div>
 
         <div>
-          <label for="cast">Cast Member</label>
-          <input type="text" id="cast" name="cast">
+          <label for="Genre">Genre</label>
+          <input type="text" id="Genre" name="Genre">
         </div>
 
         <div>
-          <label for="genre">Genre</label>
-          <input type="text" id="genre" name="genre">
+          <label for="MPAARating">MPAA Rating</label>
+          <input type="text" id="MPAARating" name="MPAARating">
         </div>
 
         <div>
-          <label for="rating_min">Min Rating (0-10):</label>
-          <input type="number" id="rating_min" name="rating_min" min="0" max="10" step="0.1">
+          <label for="RuntimeMin">Minimum Runtime</label>
+          <input type="number" id="RuntimeMin" name="RuntimeMin">
         </div>
 
         <div>
-          <label for="rating_max">Max Rating (0-10):</label>
-          <input type="number" id="rating_max" name="rating_max" min="0" max="10" step="0.1">
+          <label for="RuntimeMax">Maximum Runtime</label>
+          <input type="number" id="RuntimeMax" name="RuntimeMax">
         </div>
 
         <div>

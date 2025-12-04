@@ -1,3 +1,59 @@
+<?php
+  $host = 'localhost';
+  $db   = 'movie_db';
+  $user = 'root';
+  $pass = 'password';
+  $charset = 'utf8mb4';
+
+  $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+  $options = [
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+      PDO::ATTR_EMULATE_PREPARES   => false,
+  ];
+
+  $results = [];
+
+  try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+
+    $sql = "SELECT * FROM products WHERE 1=1";
+    $params = [];
+
+    if (!empty($_POST['Title'])) {
+        $sql .= " AND Title = :Title";
+        $params[':Title'] = $_POST['Title'];
+    }
+
+    if (!empty($_POST['Genre'])) {
+        $sql .= " AND Genre = :Genre";
+        $params[':Genre'] = $_POST['Genre'];
+    }
+
+    if (!empty($_POST['MPAARating'])) {
+        $sql .= " AND MPAARating = :MPAARating";
+        $params[':MPAARating'] = $_POST['MPAARating'];
+    }
+
+    if (!empty($_POST['RuntimeMin']) && is_numeric($_POST['RuntimeMin'])) {
+        $sql .= " AND Runtime >= :RuntimeMin";
+        $params[':RuntimeMin'] = $_POST['RuntimeMin'];
+    }
+    
+    if (!empty($_POST['RuntimeMax']) && is_numeric($_POST['RuntimeMax'])) {
+        $sql .= " AND Runtime <= :RuntimeMax";
+        $params[':RuntimeMax'] = $_POST['RuntimeMax'];
+    }
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    $results = $stmt->fetchAll();
+
+  } catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,61 +75,27 @@
 
   <main>
     <h2>Movies Matching Your Search</h2>
-    <?php
-      echo "<table>";
-      echo "<thead>
-              <tr>
-                <th>Title</th>
-                <th>Release Date</th>
-                <th>Genre</th>
-                <th>Average Rating</th>
-                <th>Runtime</th>
-              </tr>
-            </thead>";
-      echo "<tbody>";
-
-      class TableRows extends RecursiveIteratorIterator {
-        function __construct($it) {
-          parent::__construct($it, self::LEAVES_ONLY);
-        }
-
-        function current() : mixed {
-          return "" . parent::current(). "</td>";
-        }
-
-        function beginChildren() : void  {
-          echo "<tr>";
-        }
-
-        function endChildren() : void   {
-          echo "</tr>" . "\n";
-        }
-      }
-
-      $servername = "localhost:3306";
-      $username = "root";
-      $password = "password";
-      $dbname = "movie_db";
-
-      try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $conn->prepare("SELECT Title, ReleaseDate, Genre, MPAARating, Runtime FROM Movie");
-        $stmt->execute();
-
-        // set the resulting array to associative
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-          echo $v;
-        }
-      } catch(PDOException $e) {
-        echo "Error: " . $e->getMessage();
-      }
-      $conn = null;
-
-      echo "</tbody>";
-      echo "</table>";
-    ?>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Release Date</th>
+            <th>Genre</th>
+            <th>Average Rating</th>
+            <th>Runtime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($results as $row): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($row['Title']); ?></td>
+                <td><?php echo htmlspecialchars($row['ReleaseDate']); ?></td>
+                <td><?php echo htmlspecialchars($row['MPAARating']); ?></td>
+                <td><?php echo htmlspecialchars($row['Runtime']); ?></td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
   </main>
 
   <footer>
