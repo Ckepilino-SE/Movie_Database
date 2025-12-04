@@ -25,6 +25,11 @@
         $params[':Title'] = $_POST['Title'];
     }
 
+    if (!empty($_POST['ReleaseDate'])) {
+        $sql .= " AND ReleaseDate = :ReleaseDate";
+        $params[':ReleaseDate'] = $_POST['ReleaseDate'];
+    }
+
     if (!empty($_POST['Genre'])) {
         $sql .= " AND Genre = :Genre";
         $params[':Genre'] = $_POST['Genre'];
@@ -81,7 +86,7 @@
             <th>Title</th>
             <th>Release Date</th>
             <th>Genre</th>
-            <th>Average Rating</th>
+            <th>MPAA Rating</th>
             <th>Runtime</th>
           </tr>
         </thead>
@@ -90,6 +95,7 @@
             <tr>
                 <td><?php echo htmlspecialchars($row['Title']); ?></td>
                 <td><?php echo htmlspecialchars($row['ReleaseDate']); ?></td>
+                <td><?php echo htmlspecialchars($row['Genre']); ?></td>
                 <td><?php echo htmlspecialchars($row['MPAARating']); ?></td>
                 <td><?php echo htmlspecialchars($row['Runtime']); ?></td>
             </tr>
