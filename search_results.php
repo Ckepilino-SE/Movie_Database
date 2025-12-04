@@ -1,8 +1,8 @@
 <?php
-  $host = 'localhost';
+  $host = '127.0.0.1';
   $db   = 'movie_db';
   $user = 'root';
-  $pass = 'password';
+  $pass = '';
   $charset = 'utf8mb4';
 
   $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -17,12 +17,12 @@
   try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
-    $sql = "SELECT * FROM MOVIE WHERE 1=1";
+    $sql = "SELECT Title, ReleaseDate, Genre, MPAARating, Runtime FROM MOVIE WHERE 1=1";
     $params = [];
 
     if (!empty($_POST['Title'])) {
-        $sql .= " AND Title = :Title";
-        $params[':Title'] = $_POST['Title'];
+      $sql .= " AND Title LIKE :Title";
+      $params[':Title'] = '%' . $_POST['Title'] . '%';
     }
 
     if (!empty($_POST['ReleaseDate'])) {
@@ -93,7 +93,7 @@
         <tbody>
           <?php foreach ($results as $row): ?>
             <tr>
-                <td><?php echo htmlspecialchars($row['Title']); ?></td>
+                <td><a href="movie_details.php?title=<?php echo urlencode($row['Title']); ?>&release=<?php echo urlencode($row['ReleaseDate']); ?>"><?php echo htmlspecialchars($row['Title']); ?></a></td>
                 <td><?php echo htmlspecialchars($row['ReleaseDate']); ?></td>
                 <td><?php echo htmlspecialchars($row['Genre']); ?></td>
                 <td><?php echo htmlspecialchars($row['MPAARating']); ?></td>
