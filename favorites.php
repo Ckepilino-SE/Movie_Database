@@ -9,12 +9,12 @@
   <header class="header">
     <a href="#default" class="logo">DataFlix</a>
     <div class="header-right">
-      <a href="index.html">Home</a>
-      <a href="search_movies.html">Search Movies</a>
-      <a class="active" href="favorites.html">My Favorites</a>
-      <a href="user_profile.html">My Profile</a>
-      <a href="login.html">Login</a>
-    </div>  
+      <a href="index.php">Home</a>
+      <a href="search_movies.php">Search Movies</a>
+      <a class="active" href="favorites.php">My Favorites</a>
+      <a href="user_profile.php">My Profile</a>
+      <a href="login.php">Login</a>
+    </div>
   </header>
 
   <main>
