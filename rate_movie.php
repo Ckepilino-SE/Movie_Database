@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +16,19 @@
       <a href="search_movies.php">Search Movies</a>
       <a href="favorites.php">My Favorites</a>
       <a href="user_profile.php">My Profile</a>
-      <a href="login.php">Login</a>
+      <?php if (isset($_SESSION['user'])): ?>
+        <a href="logout.php">Logout</a>
+      <?php else: ?>
+        <a href="login.php">Login</a>
+        <a href="register.php">Register</a>
+      <?php endif; ?>
     </div>  
   </header>
 
   <main>
+    <?php if (!isset($_SESSION['user'])): ?>
+      <p>Please <a href="login.php">login</a> to rate movies.</p>
+    <?php else: ?>
     <form method="post">
       <fieldset>
         <legend>Movie Information</legend>
@@ -45,6 +56,7 @@
         <button type="submit">Submit Review</button>
       </div>
     </form>
+    <?php endif; ?>
   </main>
 
   <footer>

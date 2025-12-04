@@ -1,16 +1,5 @@
 <?php
-  $host = '127.0.0.1';
-  $db   = 'movie_db';
-  $user = 'root';
-  $pass = '';
-  $charset = 'utf8mb4';
-
-  $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-  $options = [
-      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-      PDO::ATTR_EMULATE_PREPARES   => false,
-  ];
+  require_once __DIR__ . '/config.php';
 
   $movie = null;
   $directors = [];
@@ -22,7 +11,7 @@
   $releaseParam = isset($_GET['release']) ? $_GET['release'] : '';
 
   try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
+    $pdo = new PDO($DB_DSN, $DB_USER, $DB_PASS, $DB_OPTIONS);
 
     if (!empty($titleParam) && !empty($releaseParam)) {
       // Movie core details (composite PK: Title + ReleaseDate)
@@ -76,6 +65,7 @@
       <a href="favorites.php">My Favorites</a>
       <a href="user_profile.php">My Profile</a>
       <a href="login.php">Login</a>
+      <a href="register.php">Register</a>
     </div>  
   </header>
 

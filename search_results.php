@@ -1,21 +1,10 @@
 <?php
-  $host = '127.0.0.1';
-  $db   = 'movie_db';
-  $user = 'root';
-  $pass = '';
-  $charset = 'utf8mb4';
-
-  $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-  $options = [
-      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-      PDO::ATTR_EMULATE_PREPARES   => false,
-  ];
+  require_once __DIR__ . '/config.php';
 
   $results = [];
 
   try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
+    $pdo = new PDO($DB_DSN, $DB_USER, $DB_PASS, $DB_OPTIONS);
 
     $sql = "SELECT Title, ReleaseDate, Genre, MPAARating, Runtime FROM MOVIE WHERE 1=1";
     $params = [];

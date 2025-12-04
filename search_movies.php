@@ -14,6 +14,7 @@
       <a href="favorites.php">My Favorites</a>
       <a href="user_profile.php">My Profile</a>
       <a href="login.php">Login</a>
+      <a href="register.php">Register</a>
     </div>  
   </header>
 
