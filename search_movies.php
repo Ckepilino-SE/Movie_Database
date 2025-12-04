@@ -18,7 +18,7 @@
   </header>
 
   <main>
-    <form method="get">
+    <form action="search_results.php", method="POST">
         <div>
           <label for="title">Title</label>
           <input type="text" id="title" name="title">

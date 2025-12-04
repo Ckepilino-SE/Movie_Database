@@ -50,7 +50,7 @@
         }
       }
 
-      $servername = "localhost,3306";
+      $servername = "localhost:3306";
       $username = "root";
       $password = "password";
       $dbname = "movie_db";
