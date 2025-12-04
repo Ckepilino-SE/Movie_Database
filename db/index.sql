@@ -14,7 +14,7 @@
       <a href="favorites.html">My Favorites</a>
       <a href="user_profile.html">My Profile</a>
       <a href="login.html">Login</a>
-    </div>  
+    </div>
   </header>
   <main>
     <h2>Welcome to DataFlix</h2>
@@ -27,4 +27,3 @@
   </footer>
 </body>
 </html>
-

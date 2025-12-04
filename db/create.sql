@@ -1,0 +1,102 @@
+USE MovieDB;
+
+SET GLOBAL local_infile = 1;
+DROP TABLE IF EXISTS STARS_IN, PRODUCES, EDITS, WRITES, DIRECTS;
+DROP TABLE IF EXISTS FAVORITES;
+DROP TABLE IF EXISTS EXTERNAL_REVIEW, USER_REVIEW, REVIEW;
+DROP TABLE IF EXISTS USER;
+DROP TABLE IF EXISTS PERSON;
+DROP TABLE IF EXISTS MOVIE;
+CREATE TABLE MOVIE (
+ Title VARCHAR(255) NOT NULL,
+ ReleaseDate DATE NOT NULL,
+ Genre VARCHAR(50),
+ MPAARating ENUM('G','PG','PG-13','R','NC-17','NR') DEFAULT 'NR',
+ Poster VARCHAR(512),
+ Runtime SMALLINT,
+ PRIMARY KEY (Title, ReleaseDate)
+) ENGINE=InnoDB;
+CREATE TABLE PERSON (
+ FirstName VARCHAR(100) NOT NULL,
+ LastName VARCHAR(100) NOT NULL,
+ DateOfBirth DATE NOT NULL,
+ Minit CHAR(1),
+ PRIMARY KEY (FirstName, LastName, DateOfBirth)
+) ENGINE=InnoDB;
+CREATE TABLE USER (
+ Email VARCHAR(255) NOT NULL,
+ PhoneNumber VARCHAR(20) NOT NULL,
+ FirstName VARCHAR(100),
+ Minit CHAR(1),
+ LastName VARCHAR(100),
+ DateOfBirth DATE,
+ ProfilePicture VARCHAR(512),
+ PRIMARY KEY (Email, PhoneNumber)
+) ENGINE=InnoDB;
+--REVIEW (Parent)
+CREATE TABLE REVIEW (
+ DatePosted DATETIME NOT NULL,
+ Author VARCHAR(100),
+ WrittenReview TEXT,
+ Rating TINYINT NOT NULL CHECK (Rating BETWEEN 1 AND 10),
+ PRIMARY KEY (DatePosted)
+) ENGINE=InnoDB;
+-- 5. USER_REVIEW (Child – CASCADE from REVIEW & USER)
+CREATE TABLE USER_REVIEW (
+ DatePosted DATETIME NOT NULL,
+ UserEmail VARCHAR(255) NOT NULL,
+ UserPhoneNumber VARCHAR(20) NOT NULL,
+ PRIMARY KEY (DatePosted),
+ FOREIGN KEY (DatePosted) REFERENCES REVIEW(DatePosted) ON DELETE CASCADE,
+ FOREIGN KEY (UserEmail, UserPhoneNumber) REFERENCES USER(Email,
+PhoneNumber) ON DELETE CASCADE
+) ENGINE=InnoDB;
+-- FAVORITES (Child from USER & MOVIE)
+CREATE TABLE FAVORITES (
+ UserEmail VARCHAR(255) NOT NULL,
+ UserPhoneNumber VARCHAR(20) NOT NULL,
+ MovieTitle VARCHAR(255) NOT NULL,
+ MovieReleaseDate DATE NOT NULL,
+ PRIMARY KEY (UserEmail, UserPhoneNumber, MovieTitle, MovieReleaseDate),
+ FOREIGN KEY (UserEmail, UserPhoneNumber) REFERENCES USER(Email,
+PhoneNumber) ON DELETE CASCADE,
+ FOREIGN KEY (MovieTitle, MovieReleaseDate) REFERENCES MOVIE(Title, ReleaseDate)
+ON DELETE CASCADE
+) ENGINE=InnoDB;
+-- DIRECTS (Child from MOVIE & PERSON)
+CREATE TABLE DIRECTS (
+ MovieTitle VARCHAR(255) NOT NULL,
+ MovieReleaseDate DATE NOT NULL,
+ FirstName VARCHAR(100) NOT NULL,
+ LastName VARCHAR(100) NOT NULL,
+ DateOfBirth DATE NOT NULL,
+ PRIMARY KEY (MovieTitle, MovieReleaseDate, FirstName, LastName, DateOfBirth),
+ FOREIGN KEY (MovieTitle, MovieReleaseDate) REFERENCES MOVIE(Title, ReleaseDate)
+ON DELETE CASCADE,
+ FOREIGN KEY (FirstName, LastName, DateOfBirth) REFERENCES PERSON(FirstName,
+LastName, DateOfBirth) ON DELETE CASCADE
+) ENGINE=InnoDB;
+CREATE TABLE WRITES (
+ MovieTitle VARCHAR(255) NOT NULL,
+ MovieReleaseDate DATE NOT NULL,
+ FirstName VARCHAR(100) NOT NULL,
+ LastName VARCHAR(100) NOT NULL,
+ DateOfBirth DATE NOT NULL,
+ PRIMARY KEY (MovieTitle, MovieReleaseDate, FirstName, LastName, DateOfBirth),
+ FOREIGN KEY (MovieTitle, MovieReleaseDate) REFERENCES MOVIE(Title, ReleaseDate)
+ON DELETE CASCADE,
+ FOREIGN KEY (FirstName, LastName, DateOfBirth) REFERENCES PERSON(FirstName,
+LastName, DateOfBirth) ON DELETE CASCADE
+) ENGINE=InnoDB;
+CREATE TABLE STARS_IN (
+ MovieTitle VARCHAR(255) NOT NULL,
+ MovieReleaseDate DATE NOT NULL,
+ FirstName VARCHAR(100) NOT NULL,
+ LastName VARCHAR(100) NOT NULL,
+ DateOfBirth DATE NOT NULL,
+ PRIMARY KEY (MovieTitle, MovieReleaseDate, FirstName, LastName, DateOfBirth),
+ FOREIGN KEY (MovieTitle, MovieReleaseDate) REFERENCES MOVIE(Title, ReleaseDate)
+ON DELETE CASCADE,
+ FOREIGN KEY (FirstName, LastName, DateOfBirth) REFERENCES PERSON(FirstName,
+LastName, DateOfBirth) ON DELETE CASCADE
+) ENGINE=InnoDB;
