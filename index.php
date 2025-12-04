@@ -18,7 +18,7 @@
   </header>
   <main>
     <h2>Welcome to DataFlix</h2>
-    <p>Search movies by title, director, cast, genre, and rating.</p>
+    <p>Search movies by title, release date, genre, MPAA rating, and runtime.</p>
     <p>View compiled ratings from IMDb, Rotten Tomatoes, Google Reviews, and DataFlix users.</p>
   </main>
 
