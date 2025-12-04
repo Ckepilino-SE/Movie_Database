@@ -17,7 +17,7 @@
   try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
-    $sql = "SELECT * FROM products WHERE 1=1";
+    $sql = "SELECT * FROM MOVIE WHERE 1=1";
     $params = [];
 
     if (!empty($_POST['Title'])) {
